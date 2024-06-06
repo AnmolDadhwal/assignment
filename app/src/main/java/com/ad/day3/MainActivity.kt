@@ -1,5 +1,6 @@
 package com.ad.day3
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -29,8 +30,21 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         check?.setOnClickListener {
-
-            Toast.makeText(this,"Value Entered ${name?.text} ${city?.text} ${collegename?.text}", Toast.LENGTH_SHORT).show()
+            if(name?.text?.trim().isNullOrEmpty()){
+                name?.error="Enter The Name"
+            }else if (city?.text?.trim().isNullOrEmpty()){
+                city?.error="Enter The City"
+            }else if(collegename?.text?.trim().isNullOrEmpty()){
+                collegename?.error="Enter The College Name"
+            }else {
+                Toast.makeText(
+                    this,
+                    "Value Entered ${name?.text} ${city?.text} ${collegename?.text}",
+                    Toast.LENGTH_SHORT
+                ).show()
+                var intent = Intent(this, MainActivity2::class.java)
+                startActivity(intent)
+            }
         }
     }
 }
